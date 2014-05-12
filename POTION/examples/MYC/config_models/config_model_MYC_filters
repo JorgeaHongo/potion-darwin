@@ -1,0 +1,107 @@
+#path_of_nt_files = /home/francisco/Mycobacterium/sequences/tmp/                # path to the directory with the fasta files containing the nucleotide sequence of genes of each specie.
+path_of_nt_files = /home/francisco/Mycobacterium/sequences/fasta/nt/                # path to the directory with the fasta files containing the nucleotide sequence of genes of each specie.
+#cluster_file = /home/francisco/Mycobacterium/Mycobacterium_groups_5_genomes                      # path to the file with ortholog groups
+cluster_file = /home/francisco/Mycobacterium/Mycobacterium_groups_19_genomes                      # path to the file with ortholog groups
+
+-=-=-= PROJECT NAME =-=-=-
+
+project_dir = /home/francisco/Mycobacterium/Mycobacterium_19_genomes_final/               # path to the directory where the result files will be created
+
+-=-=-= PROJECT CONFIGURATION =-=-=-
+
+#reference_genome_files = NC_000962 
+reference_genome_files = NC_000962_3 
+                                                    # Genome set to be used as the reference to determine the selective pressure acting upon them
+                                                    # any ortholog group without any gene from one or more of these won't be added to the results
+                                                    # Uses the name after the gene in the file containing the information of the ortholog groups
+                                                    # Ex: Bovine_herpesvirus_1_39(Bovine_herpesvirus_1.gb_proteins)  -->  reference_genome_files = Bovine_herpesvirus_1.gb_proteins
+                                                    # Use (w) or (weak) before the file's name to allow groups with invalid sequences to be added to the analysis
+                                                    # Use (s) or (strong) to allow only valid sequences to classify an ortholog group as such; groups with an invalid sequence won't be added to the final results unless another valid sequence coming from a reference genome.
+
+groups_to_process = all 
+
+#groups_to_process = 1-200
+
+
+# Defines which lines of the cluster file (ortholog groups) will be processed. Use "all" to process every group, "-" to set groups between two given lines (including the said lines)
+                                                    # Use "!" to not process a specific line, can be used with "-" to specify a set to not be processed. Useful if certain groups are taking too long to finish. 
+                                                    # Use "," or ";" to set distinct sets
+                                                    # Examples: 1;4-10;12  will process groups 1, 4 to 10 and group 12
+                                                    #           all;!3     will process all groups, except group 3
+                                                    #           all;!3-5   will process all groups, except groups 3 to 5
+
+
+additional_start_codons = ()           # add optional start codons here. These will be considered together with the start codons specified in the codon table defined above
+additional_stop_codons = ()                         # same as above for stop codons.
+
+recombination_qvalue = 0.1                          # Qvalue used to identify recombination, must be between 0 and 1. 0 = do not look for recombination
+rec_minimum_confirmations = 2                       # Sets how many of the three recombination tests must result in a confirmation to excludea group from the analysis
+rec_mandatory_tests = Phi                           # Sets which tests must confirm recombination in order to exclude a group
+
+
+
+
+behavior_about_paralogs = 1                         # For cases when one specie has more than one ortholog gene with the other species in a orthology set (cluster),
+                                                    # change this variable to define whether this paralogies are problematic for your study and how to proceed:
+                                                             # 0 means paralogy won't affect your study and will be accepted (no validation regarding this aspect will be done)
+                                                             # 1 means paralogy is undesirable, species with paralogous genes will be removed to leave only single-copy genes in the cluster for analysis
+                                                             # 2 means paralogy invalidates the orthology found, only clusters with only single-copy genes will be accepted by this program
+                                                             # 3 means only paralogies are of interest and should be analyzed inside the group
+                                                             # 4 means only paralogies within the same specie are of interest and should be analyzed individually
+
+codon_table = 11                                    # indicates the codon table id according to NCBI and bioperl standard. See http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi for further information.
+
+minimum_gene_number_per_cluster = 4                 # minimum value of 3 due to the need to produce phylogenetic trees.
+maximum_gene_number_per_cluster = 1000              # maximum value for phylogenic trees, leave "undef" to set no maximum value.
+minimum_specie_number_per_cluster = 4               
+maximum_specie_number_per_cluster = 19            # maximum value for phylogenic trees, leave "undef" to set no maximum value.
+
+remove_gaps = strict                                # defines whether gaps are trimmed before generating phylogenetic trees. 0 to remove only columns filled with gaps, 1 to generate files with no gaps.
+                                                    # Special mode for high reliability: strict or strictplus 
+                                                    # (refer to TrimAl supplementary material: http://trimal.cgenomics.org/_media/supplmaterial.b.pdf)
+                                                    # between 0 and 1 to set minimum percentage of aminoacid or nucleotides aligned in each column.
+
+verbose = 1                                         # defines whether the program will keep the user informed about the program's operations.
+                                                    # 0 for only info of log-likelihood in output, 1 for full info. To receive no info, use "1>/dev/null" as an additional parameter in command line
+
+remove_identical = yes                               # used to remove 100% identical nucleotide clusters
+
+
+-=-=-= QUALITY AND PERFORMANCE =-=-=-
+
+PAML_models = m12 m78                               # PAML models to compare, can use more than one (ex: models = m12 m78). Current options are: m12 (M1a with M2a), m78 (M7 with M8)
+max_processes = 90                                  # maximum number of processes running, in case you need to limit mem and cpu usage (shared cluster, debugging, performance test, etc).
+bootstrap = 100                                     # number of trees generated by phylip program seqboot, minimum of 100 recommended. Has a tradeoff between performance and precision of data.
+pvalue = 0.05                                       # pvalue used in the results to verify groups with positive selection
+qvalue = 0.05                                       # qvalue used in the results to verify groups with positive selection
+phylogenetic_tree_speed = fast                      # Option for Proml and Dnaml, 'fast' is the standard mode for both, 'slow' is the most likely to find the topology of highest likelihood.
+
+behavior_about_bad_clusters = 1                     # This variable defines the verification of the cluster's data quality regarding nucleotide sequences
+                                                             # 0 means no validation of sequences (not recommended, may lead to inaccurate results)
+                                                             # 1 means only removal of problematic sequences, the remaining sequences in the cluster will be analyzed
+                                                             # 2 means the program won't evaluate any cluster with invalid sequences
+validation_criteria = all                           # This variable sets which criterias will be adopted to validate the nucleotide sequences, set all options you desire
+                                                             # '1' checks if the start codon is valid for the codon table chosen and within the additional start codons
+                                                             # '2' checks does the same for stop codons
+                                                             # '3' checks if the sequence size is multiple of 3
+                                                             # '4' checks if there are both 'T' and 'U' nucleotides
+                                                             # '5' checks if there are any nucleotides outside ATCG or AUCG
+                                                             # 'all' applies every verification
+
+absolute_min_sequence_size = 150                    # Accepted minimum number of nucleotides in any sequence; added to control some cases of noise-prone sequences
+absolute_max_sequence_size = 100000
+relative_min_sequence_size = 0.83                      # Accepted relative size of nucleotides of each sequence in a group, every sequence must be equal or larger than the proportion
+relative_max_sequence_size  = 1.2                      #  when compared to the biggest sequence.
+sequence_size_dispersion_measure = median               #                                                      #  Value between 0 and 1, or (0,1]
+
+
+mean_divergence_identity_overall = 70               #must go to configuration file!
+mean_divergence_identity_most_similar_sequence = 70 #must go to configuration file!
+identity_most_similar_sequence = 80                 #must go to configuration file!
+mean_sequence_identity = 80                         #must go to configuration file!
+
+
+-=-=-= MODULES =-=-=-
+
+multiple_alignment = prank                         # Program to use in the multiple alignment. Current options: Muscle, Prank. Muscle is currently the default option, in case this parameter is left empty or as undef.
+phylogenetic_tree = proml                           # Program to use in the construction of the phylogenetic tree. Current options: Proml, Dnaml

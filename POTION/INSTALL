@@ -1,0 +1,121 @@
+ 	
+			INSTALL for POTION
+		      (last updated 17/03/2014)
+
+Authors
+-=-=-=-
+
+Jorge Augusto Hongo (jorgeahongo@gmail.com, jorge.hongo@colaborador.embrapa.br)
+Francisco Pereira Lobo (franciscolobo@gmail.com, francisco.lobo@embrapa.br)
+
+
+First things first: dependencies
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+A - Third-party software
+-=-=-=-=-=-=-=-=-=-=-=-=
+
+You need to install the following third-party software to use POTION:
+
+- MUSCLE    http://www.drive5.com/muscle/downloads.htm
+- Prank     http://www.ebi.ac.uk/goldman-srv/prank/prank/ 
+            check in particular http://code.google.com/p/prank-msa/downloads/list
+- MAFFT     http://mafft.cbrc.jp/alignment/software/
+- PhiPack - Phi executable (www.maths.otago.ac.nz/~dbryant/software/PhiPack.tar)
+- phylip  - seqboot, dnaml/proml and consense executables 
+            (http://evolution.genetics.washington.edu/phylip.html)
+- PAML    - codeml executable (http://abacus.gene.ucl.ac.uk/software/paml.html)
+- TrimAl    http://trimal.cgenomics.org/downloads
+
+Make sure to use the most recent version of each of these packages. Note that
+you can choose between MUSCLE, Prank and MAFFT for protein multiple sequence 
+alignment, and between dnaml and proml for the phylogenetic tree reconstruction,
+so having only one of them is enough to complete POTION install.
+
+Note
+-=-=-
+
+Some of the programs above are compiled in C and require the library GLIBC to run. Make sure your computer is
+using the same GLIBC version that was used to compile those programs, or you will get the error message:
+"version `GLIBC_x.xx' not found". As of current writing, you can find the latest update of GLIBC in
+http://www.gnu.org/software/libc/index.html
+
+
+
+
+B - Perl modules
+-=-=-=-=-=-=-=-=
+
+You also need to have Perl, BioPerl, and some other modules installed in your
+machine:
+
+Bio::SeqIO
+Bio::AlignIO
+Cwd
+File::chdir
+File::Copy
+POSIX
+Statistics::Distributions
+Statistics::Multtest
+Tie::File
+Try::Tiny
+Data::Dumper
+File::Spec::Functions
+File::Basename
+FindBin
+Capture::Tiny
+Getopt::Long
+
+You can check if you have them installed in your machine with 
+'perl -M<module> -e 1'. It will return an error message if it isn't installed.
+
+Ex: "perl -MBio::SeqIO -e 1"
+
+To install these modules, you can do through the CPAN or manually downloading
+(http://search.cpan.org/) and compiling them. To use CPAN, you can do by 
+writing:
+
+> perl -MCPAN -e 'install <module>'
+
+To install manually, search for the most recent version of these modules and,
+for each, download and type the following:
+
+> tar -zxvf <module.tar.gz>
+> perl Makefile.PL
+> make
+> make test
+> make install
+
+
+
+Seting POTION environment
+-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Editing 'config_file'
+-=-=-=-=-=-=-=-=-=-=-
+
+Uncompress the .tar.gz file downloaded from POTION website 
+(https://code.google.com/p/potion-source/) and place in a folder of your 
+choice. This folder will be refered as the 'potion_dir' folder. 
+Then edit POTION's configuration file (potion_config), found in the directory
+'config_files'. 
+
+Write the absolute path to POTION's main directory in parameter "potion_dir".
+This can be done wth the "pwd" command in your terminal. Ex:
+
+potion_dir = /home/me/programs/POTION/
+
+Set the absolute path of the third-party software IF you did not have added
+their path to $PATH variable. You can use variable $potion_dir to refer to 
+potion_dir value.
+
+- codeml: path to the Codeml executable of PAML package
+- consense: path to the Consense executable of Phylip package
+- dnaml: path to the Dnaml executable
+- mafft: path to MAFFT 
+- muscle: path to the MUSCLE executable
+- phipack: path to the Phi executable of PhiPack
+- prank: path to the Prank executable
+- proml: path to the Proml executable of Phylip package
+- seqboot: path to the Seqboot executable of Phylip package
+- trimal: path to the Trimal executable
