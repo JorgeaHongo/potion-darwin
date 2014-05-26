@@ -1,8 +1,7 @@
- 	
-			INSTALL for POTION
-		      (last updated 17/03/2014)
+                INSTALL instructions for POTION
+                   (last updated 17/03/2014)
 
-Authors
+  Authors
 -=-=-=-
 
 Jorge Augusto Hongo (jorgeahongo@gmail.com, jorge.hongo@colaborador.embrapa.br)
@@ -29,8 +28,8 @@ You need to install the following third-party software to use POTION:
 
 Make sure to use the most recent version of each of these packages. Note that
 you can choose between MUSCLE, Prank and MAFFT for protein multiple sequence 
-alignment, and between dnaml and proml for the phylogenetic tree reconstruction,
-so having only one of them is enough to complete POTION install.
+alignment, and between dnaml and proml for phylogenetic tree reconstruction, so
+having only one of them is enough to complete POTION install.
 
 Note
 -=-=-
@@ -91,19 +90,19 @@ for each, download and type the following:
 Seting POTION environment
 -=-=-=-=-=-=-=-=-=-=-=-=-
 
-Editing 'config_file'
+Editing 'potion_config'
 -=-=-=-=-=-=-=-=-=-=-
 
 Uncompress the .tar.gz file downloaded from POTION website 
-(https://code.google.com/p/potion-source/) and place in a folder of your 
+(https://code.google.com/p/potion-darwin/) and place in a folder of your 
 choice. This folder will be refered as the 'potion_dir' folder. 
 Then edit POTION's configuration file (potion_config), found in the directory
 'config_files'. 
 
 Write the absolute path to POTION's main directory in parameter "potion_dir".
-This can be done wth the "pwd" command in your terminal. Ex:
+This path can be found wtih the "pwd" command in your terminal. Ex:
 
-potion_dir = /home/me/programs/POTION/
+potion_dir = /home/me/programs/POTION-<version>/
 
 Set the absolute path of the third-party software IF you did not have added
 their path to $PATH variable. You can use variable $potion_dir to refer to 
@@ -119,3 +118,9 @@ potion_dir value.
 - proml: path to the Proml executable of Phylip package
 - seqboot: path to the Seqboot executable of Phylip package
 - trimal: path to the Trimal executable
+
+
+
+
+
+
