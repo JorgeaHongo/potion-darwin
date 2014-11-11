@@ -64,7 +64,7 @@ validation_criteria = all                # quality criteria to remove sequences.
 
 absolute_min_sequence_size = 150         # minimum sequence length cutoff for sequence/group further evaluation
 
-absolute_max_sequence_size = 10000       # maximum sequence length cutoff for sequence/group further evaluation
+absolute_max_sequence_size = 100000       # maximum sequence length cutoff for sequence/group further evaluation
 
 relative_min_sequence_size = 0.83         # sequences smaller than mean|meadian times this value will be filtered
 
