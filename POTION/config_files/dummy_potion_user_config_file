@@ -1,7 +1,14 @@
 ###############PROJECT CONFIGURATION#######################
 
 path_of_nt_files =                       # path to the directory containing the fasta CDS files, one per genome
+
+path_of_user_defined_tree =              # path to user-defined tree, used to create dummy phylogenetic tree
+                                         # files when users assume species tree to be the same as thel
+                                         # trees of each homologous group. Mandatory parameter when executing
+                                         # POTION in branch or branch-site model.
+
 cluster_file =                           # path to the ORTHOMCL 1.4 main output file 
+
 project_dir =                            # path to the main directory where results will be created
 
 reference_genome_files =                 # genome reference name, leave blank for none (same name used in fasta file)
@@ -56,9 +63,11 @@ validation_criteria = all                # quality criteria to remove sequences.
                                          # 'all' applies every verification
 
 absolute_min_sequence_size = 150         # minimum sequence length cutoff for sequence/group further evaluation
+
 absolute_max_sequence_size = 10000       # maximum sequence length cutoff for sequence/group further evaluation
 
 relative_min_sequence_size = 0.5         # sequences smaller than mean|meadian times this value will be filtered
+
 relative_max_sequence_size = 2           # sequences greater than mean|meadian times this value will be filtered
 
 sequence_size_dispersion_measure = mean  # which dispersion measure will be calculated to determine the 
@@ -66,6 +75,7 @@ sequence_size_dispersion_measure = mean  # which dispersion measure will be calc
                                          # Possible values are "mean" and "median"
 
 mean_divergence_identity_overall = 80    # remove groups with mean sequence identity smaller than this cutoff 
+
 mean_divergence_identity_most_similar_sequence = 80 # remove groups with mean sequence identity smaller than
                                          # this value when comparing all highest alignment pairs 
 identity_most_similar_sequence = 80      # remove sequences with  highest identity with any other sequence within
@@ -74,8 +84,11 @@ mean_sequence_identity = 80              # remove sequences with mean identity w
                                          # than this value
 
 minimum_gene_number_per_cluster = 3      # minimum # genes in group after all filtering steps to proceed with group
+
 maximum_gene_number_per_cluster = 19     # maximum # genes in group after all filtering steps to proceed with group
+
 minimum_specie_number_per_cluster = 3    # minimum # species in group after all filtering steps to proceed with group
+
 maximum_specie_number_per_cluster = 19   # maximum # species in group after all filtering steps to proceed with group
 
 
@@ -85,12 +98,16 @@ multiple_alignment = muscle             # program used for multiple sequence ali
                                         # muscle, mafft and prank
 
 bootstrap = 100                          # number of bootstraps in phylogenetic analysis
-phylogenetic_tree_speed = fast           # fast or slow analysis? Used in phylip dnaml or proml analysis
-phylogenetic_tree = proml               # program used for phylogenetic tree reconstruction. Possible values are
-                                        # proml and dnaml
+
+phylogenetic_tree_speed = fast           # fast or slow analysis? Used in phylip dnaml or proml analysis only
+
+phylogenetic_tree = codonphyml_aa       # program used for phylogenetic tree reconstruction. Possible values are
+                                        # proml, dnaml, codonphyml_aa or codonphyml_nt
 
 recombination_qvalue = 0.1               # q-value for recombination detection. Must occur for all the specified tests
+
 rec_minimum_confirmations = 2            # minimum number of significant recombination tests positives
+
 rec_mandatory_tests = phi maxchi2 nss    # any combination of the three test names, separated by spaces
 
 remove_gaps = strictplus                 # numeric values between 0 and 1 will remove columns with that percentage of
@@ -98,5 +115,7 @@ remove_gaps = strictplus                 # numeric values between 0 and 1 will r
                                          # filters to remove unreliable regions (described in trimal article)
 
 PAML_models = m12 m78                    # codeml models to be generated. "m12" and/or "m78" values acceptable.
+
 pvalue = 0.05                            # p-values for positive selection detection
+
 qvalue = 0.05                            # q-values for positive selection detection
