@@ -1,0 +1,1 @@
+A pipeline written in Perl to automatically parse and filter sequence and homology data based on phylogenetic and quality criteria in order to detect positive (Darwinian) selection in genomic-scale data. More details in POTION's article or README.txt file.
